@@ -42,7 +42,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
     packaging {
         resources {
@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.preview)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation (libs.coil.kt)
 }
 
 kapt {
