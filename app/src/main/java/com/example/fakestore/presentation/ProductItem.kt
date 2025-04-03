@@ -14,8 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.example.fakestore.data.Product
-import coil.compose.rememberImagePainter
 
 @Composable
 fun ProductItem(product: Product) {
@@ -26,7 +26,7 @@ fun ProductItem(product: Product) {
     ) {
         // Carga la imagen del producto
         Image(
-            painter = rememberImagePainter(product.images.first()), // La primera imagen del producto
+            painter = rememberAsyncImagePainter(product.images.first()), // La primera imagen del producto
             contentDescription = product.title,
             modifier = Modifier
                 .height(150.dp)
@@ -44,7 +44,7 @@ fun ProductItem(product: Product) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             // Carga la imagen de la categoría
             Image(
-                painter = rememberImagePainter(product.category.image),
+                painter = rememberAsyncImagePainter(product.category.image),
                 contentDescription = product.category.name,
                 modifier = Modifier
                     .size(24.dp)

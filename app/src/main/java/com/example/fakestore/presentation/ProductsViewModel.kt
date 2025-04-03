@@ -22,7 +22,6 @@ class ProductsViewModel @Inject constructor(private val getProductsUseCase: Prod
     private fun getProducts() {
         viewModelScope.launch {
             _products.value = getProductsUseCase.getProducts()
-            val x = 0
         }
     }
 }
