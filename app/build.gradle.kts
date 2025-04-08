@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation (libs.coil.kt)
+    implementation(libs.navigation.compose)
 }
 
 kapt {

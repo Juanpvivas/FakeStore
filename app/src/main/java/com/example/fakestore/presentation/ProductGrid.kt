@@ -10,15 +10,14 @@ import androidx.compose.ui.unit.dp
 import com.example.fakestore.data.Product
 
 @Composable
-fun ProductGrid(products: List<Product>) {
+fun ProductGrid(products: List<Product>, onProductClick: (Product) -> Unit) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(8.dp),
-        userScrollEnabled = true
+        contentPadding = PaddingValues(8.dp)
     ) {
         items(products.size) { index ->
-            ProductItem(product = products[index])
+            ProductItem(product = products[index], onProductClick = onProductClick)
         }
     }
 }

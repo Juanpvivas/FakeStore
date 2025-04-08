@@ -3,15 +3,11 @@ package com.example.fakestore.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.fakestore.ui.theme.FakeStoreTheme
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,14 +15,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            FakeStoreTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    StoreContent()
-                }
-            }
+            StoreContent()
         }
     }
 }
@@ -35,5 +24,15 @@ class MainActivity : ComponentActivity() {
 fun StoreContent() {
     val viewModel: ProductsViewModel = hiltViewModel()
     val products = viewModel.products.value
-    ProductGrid(products)
+    val navController = rememberNavController()
+    NavHost(navController, startDestination = "mainScreen") {
+        composable("mainScreen") { MainScreen(navController, products) }
+        composable("productDetail/{productId}") { backStackEntry ->
+            val productId = backStackEntry.arguments?.getString("productId")
+            val product = products.find { it.id.toString() == productId } // Encuentra el producto por ID
+            if (product != null) {
+                ProductDetail(product)
+            }
+        }
+    }
 }
